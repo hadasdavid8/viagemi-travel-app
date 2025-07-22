@@ -1,9 +1,10 @@
 from pathlib import Path
 from decouple import config
 
+SECRET_KEY = config('GOOGLE_MAPS_API_KEY')
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-flch^@7yng7vw*04r!erbtki)ob!d*)^lsx4v+n7bi)@x5)@d)'
 
 DEBUG = True
 
