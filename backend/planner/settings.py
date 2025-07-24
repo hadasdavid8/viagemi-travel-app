@@ -64,16 +64,15 @@ WSGI_APPLICATION = 'planner.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('DB_NAME', 'travel_planner'),
-        'USER': os.getenv('DB_USER', 'root'),
-        'PASSWORD': os.getenv('DB_PASS', 'Hadas091256'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'NAME': 'viagemitravelapp',
+        'USER': 'admin',
+        'PASSWORD': 'Hadas091256',
+        'HOST': 'viagemi-db.c9yik8gk2zvq.eu-north-1.rds.amazonaws.com',
         'PORT': '3306',
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-        },
     }
 }
+
+
 
 
 AUTH_PASSWORD_VALIDATORS = [
