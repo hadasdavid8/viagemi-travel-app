@@ -87,5 +87,5 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-backend/staticfile
+backend/staticfiles
 frontend/build
