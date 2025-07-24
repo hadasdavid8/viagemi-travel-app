@@ -1,5 +1,6 @@
 from pathlib import Path
 from decouple import config
+import os
 
 SECRET_KEY = config('GOOGLE_MAPS_API_KEY')
 
@@ -8,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 INSTALLED_APPS = [
@@ -61,17 +62,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'planner.wsgi.application'
 
 DATABASES = {
-     'default': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'travel_planner',
-        'USER': 'root',
-        'PASSWORD': 'Hadas091256',
-        'HOST': 'localhost',
+        'NAME': os.getenv('DB_NAME', 'travel_planner'),
+        'USER': os.getenv('DB_USER', 'root'),
+        'PASSWORD': os.getenv('DB_PASS', 'Hadas091256'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
         'PORT': '3306',
         'OPTIONS': {
             'charset': 'utf8mb4',
         },
-    } 
+    }
 }
 
 
@@ -103,3 +104,5 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
