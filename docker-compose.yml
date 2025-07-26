@@ -2,13 +2,6 @@ services:
   backend:
     build: ./backend
     command: [ "/app/wait-for-db.sh", "python", "manage.py", "runserver", "0.0.0.0:8000" ]
-    depends_on:
-      - db
-    environment:
-      DB_HOST: db
-      DB_NAME: travel_planner
-      DB_USER: root
-      DB_PASS: Hadas091256
     ports:
       - "8000:8000"
     volumes:
