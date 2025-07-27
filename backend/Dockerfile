@@ -20,6 +20,7 @@ RUN pip install -r requirements.txt
 
 COPY . /app/
 
+RUN sed -i 's/\r$//' /app/wait-for-db.sh
 RUN chmod +x /app/wait-for-db.sh
 
 
