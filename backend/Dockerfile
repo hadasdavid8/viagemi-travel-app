@@ -18,10 +18,10 @@ COPY requirements.txt /app/
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-COPY wait-for-db.sh /app/wait-for-db.sh
+COPY . /app/
+
 RUN chmod +x /app/wait-for-db.sh
 
-COPY . /app/
 
 EXPOSE 8000
 
