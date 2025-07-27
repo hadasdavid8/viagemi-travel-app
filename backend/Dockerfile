@@ -20,9 +20,10 @@ RUN pip install -r requirements.txt
 
 COPY . /app/
 
+RUN echo '#!/bin/bash' | cat - /app/wait-for-db.sh > /tmp/wait-for-db.sh && mv /tmp/wait-for-db.sh /app/wait-for-db.sh
 RUN sed -i 's/\r$//' /app/wait-for-db.sh
 RUN chmod +x /app/wait-for-db.sh
 
 EXPOSE 8000
 
-CMD ["/bin/bash", "-c", "/app/wait-for-db.sh python manage.py runserver 0.0.0.0:8000"]
+CMD ["/app/wait-for-db.sh", "python", "manage.py", "runserver", "0.0.0.0:8000"]
