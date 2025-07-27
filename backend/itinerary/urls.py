@@ -1,4 +1,3 @@
-# itinerary/urls.py
 from django.urls import path
 from .views import ItineraryView
 from .views import get_google_maps_api_key

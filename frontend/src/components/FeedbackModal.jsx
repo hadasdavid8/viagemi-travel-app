@@ -7,6 +7,7 @@ import {
     Button,
     TextField,
 } from "@mui/material";
+import { API_BASE_URL } from '../config';
 
 export default function FeedbackModal({ open, onClose }) {
     const [feedback, setFeedback] = useState("");
@@ -14,7 +15,7 @@ export default function FeedbackModal({ open, onClose }) {
 
     const handleSubmit = async () => {
         try {
-            await fetch("http://localhost:8000/api/feedback/", {
+            await fetch(`${API_BASE_URL}feedback/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

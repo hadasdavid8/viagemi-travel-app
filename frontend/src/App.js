@@ -4,7 +4,9 @@ import Home from './pages/Home';
 import TripPreferencesPage from './pages/TripPreferencesPage';
 import LoadingPage from './pages/LoadingPage';
 import ItineraryPage from './pages/ItineraryPage';
-import DesignPage from './pages/DesignPage';
+import BlogPage from './pages/BlogPage';
+import BudgetTrackerPage from './pages/BudgetTrackerPage';
+
 
 function App() {
   return (
@@ -14,7 +16,8 @@ function App() {
         <Route path="/trip_preferences" element={<TripPreferencesPage />} />
         <Route path="/loading/:id" element={<LoadingPage />} />
         <Route path="/itinerary/:id" element={<ItineraryPage />} />
-        <Route path="/design" element={<DesignPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/budget_tracker" element={<BudgetTrackerPage />} />
       </Routes>
     </div>
   );

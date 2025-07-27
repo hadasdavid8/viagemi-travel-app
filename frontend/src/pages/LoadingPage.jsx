@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Box, CircularProgress, Typography } from '@mui/material';
-
-const API_BASE_URL = 'http://127.0.0.1:8000/';
+import { API_BASE_URL } from '../config';
 
 function LoadingPage() {
     const { id } = useParams();
