@@ -20,18 +20,8 @@ RUN pip install -r requirements.txt
 
 COPY . /app/
 
-RUN echo "echo \"Waiting for MySQL to be ready...\"" > /app/wait-for-db.sh && \
-    echo "" >> /app/wait-for-db.sh && \
-    echo "while ! nc -z viagemi-db.c9yik8gk2zvq.eu-north-1.rds.amazonaws.com 3306; do" >> /app/wait-for-db.sh && \
-    echo "  echo \"Waiting for database connection...\"" >> /app/wait-for-db.sh && \
-    echo "  sleep 1" >> /app/wait-for-db.sh && \
-    echo "done" >> /app/wait-for-db.sh && \
-    echo "" >> /app/wait-for-db.sh && \
-    echo "echo \"Database is up, starting server...\"" >> /app/wait-for-db.sh && \
-    echo "exec \"\$@\"" >> /app/wait-for-db.sh
-
+RUN sed -i 's/\r$//' /app/wait-for-db.sh
 RUN chmod +x /app/wait-for-db.sh
-
 
 EXPOSE 8000
 
