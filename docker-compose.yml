@@ -1,15 +1,12 @@
 services:
   backend:
-    build: ./backend
+    image: hadasdavid8/travelapp-backend:latest
     command: [ "/app/wait-for-db.sh", "python", "manage.py", "runserver", "0.0.0.0:8000" ]
     ports:
       - "8000:8000"
-    volumes:
-      - ./backend:/app
 
   frontend:
-    build:
-      context: ./frontend
+    image: hadasdavid8/travelapp-frontend:latest
     ports:
       - "3000:80"
     depends_on:
