@@ -6,14 +6,13 @@ on:
       - main
 
 env:
-  DOCKER_HUB_USERNAME: your-dockerhub-username
-  DOCKER_HUB_REPO_BACKEND: your-dockerhub-username/travelapp-backend
-  DOCKER_HUB_REPO_FRONTEND: your-dockerhub-username/travelapp-frontend
+  DOCKER_HUB_REPO_BACKEND: hadasdavid8/viagemi-travel-app/backend/ 
+  DOCKER_HUB_REPO_FRONTEND: hadasdavid8/viagemi-travel-app/frontend/
+
 
 jobs:
   build_and_push:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -54,4 +53,5 @@ jobs:
           script: |
             cd /path/to/your/project
             docker-compose pull
-            docker-compose up -d --build
+            docker-compose up -d
+            docker image prune -f
