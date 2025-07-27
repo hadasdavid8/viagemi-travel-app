@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {
-    Box, TextField, Button, Typography, FormControl, InputLabel, Select, MenuItem,
+    Box, TextField, Button, FormControl, InputLabel, Select, MenuItem,
     FormGroup, FormControlLabel, Checkbox, CircularProgress, Alert,
 } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
@@ -44,7 +44,6 @@ function TripPreferencesForm() {
     };
 
     const handleDateChange = (date, name) => setFormData(prev => ({ ...prev, [name]: date }));
-    const handleDurationChange = (_, value) => setFormData(prev => ({ ...prev, duration: value }));
 
     const handleSubmit = async (e) => {
         e.preventDefault();

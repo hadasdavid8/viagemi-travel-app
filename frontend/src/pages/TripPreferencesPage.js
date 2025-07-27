@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box, Typography } from '@mui/material';
 import TripPreferencesForm from '../components/TripPreferencesForm';
 import NavBar from '../components/NavBar';
