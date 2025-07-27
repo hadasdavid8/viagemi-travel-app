@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  DOCKER_HUB_REPO_BACKEND: hadasdavid8/viagemi-travel-app/backend/ 
-  DOCKER_HUB_REPO_FRONTEND: hadasdavid8/viagemi-travel-app/frontend/
+  DOCKER_HUB_REPO_BACKEND: hadasdavid8/travelapp-backend
+  DOCKER_HUB_REPO_FRONTEND: hadasdavid8/travelapp-frontend
 
 
 jobs:
