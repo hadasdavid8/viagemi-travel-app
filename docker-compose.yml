@@ -4,8 +4,9 @@ services:
     command: [ "/app/wait-for-db.sh", "python", "manage.py", "runserver", "0.0.0.0:8000" ]
     ports:
       - "8000:8000"
-    env_file:
-      - .env
+    environment:
+      GOOGLE_MAPS_API_KEY: "${GOOGLE_MAPS_API_KEY}"
+
   frontend:
     image: hadasdavid8/travelapp-frontend:latest
     ports:
