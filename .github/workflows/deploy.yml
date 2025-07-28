@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: CI/CD Pipeline
 
 on:
@@ -7,19 +8,19 @@ on:
 
 env:
   DOCKER_HUB_REPO_BACKEND: hadasdavid8/travelapp-backend
-  # DOCKER_HUB_REPO_FRONTEND: hadasdavid8/travelapp-frontend 
 
 jobs:
-  build_and_deploy: 
+  build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' 
+          node-version: '18'
 
       - name: Install Frontend dependencies
         run: |
@@ -31,22 +32,19 @@ jobs:
           cd frontend
           npm run build
 
-      - name: Deploy Frontend static files via SSH
-        uses: appleboy/ssh-action@v0.1.7
+      - name: Clean and Deploy Frontend static files via SSH (SCP)
+        uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            # נתיב היעד בשרת שבו Nginx מגיש את קבצי ה-Frontend
-            # ודאי שהמשתמש (SERVER_USER) יכול לכתוב לתיקייה זו, או להשתמש ב-sudo
-            echo "Deploying Frontend static files..."
+          script_before: |
+            echo "Cleaning existing Frontend files on server..."
             sudo rm -rf /var/www/html/* # מחיקת כל הקבצים הישנים בתיקיית ה-Nginx
-            # העתקת התוכן של תיקיית ה-build לתיקיית Nginx
-            # source: התיקייה שנוצרה בתוך ה-runner של GitHub Actions
-            # target: הנתיב בשרת
-            # שימוש ב'cp -r' להעתקה רק לאחר שה-build הושלם ב-runner
-            sudo cp -r /home/runner/work/TravelApp/TravelApp/frontend/build/* /var/www/html/ 
+            echo "Existing Frontend files cleaned."
+          source: "./frontend/build/"
+          target: "/var/www/html/"
+          script: |
             echo "Frontend files copied. Reloading Nginx..."
             sudo systemctl reload nginx
             echo "Nginx reloaded."
@@ -68,15 +66,15 @@ jobs:
           tags: ${{ env.DOCKER_HUB_REPO_BACKEND }}:latest
 
       - name: Deploy Backend via SSH
-        uses: appleboy/ssh-action@v0.1.7
+        uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             echo "Deploying Backend..."
-            cd /opt/TravelApp # ודא שזה הנתיב הנכון לפרויקט שלך בשרת שמכיל את docker-compose.yml
-            docker-compose pull # ימשוך את אימג' ה-backend החדש מ-Docker Hub
-            docker-compose up -d --remove-orphans # הפעל מחדש את הקונטיינרים (והסר קונטיינרים ישנים אם יש)
-            docker image prune -f # נקה אימג'ים ישנים
+            cd /opt/TravelApp 
+            docker-compose pull
+            docker-compose up -d --remove-orphans 
+            docker image prune -f
             echo "Backend deployed."
