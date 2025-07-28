@@ -9,7 +9,7 @@ services:
   frontend:
     image: hadasdavid8/travelapp-frontend:latest
     ports:
-      - "3000:80"
+      - "80:80"
     depends_on:
       - backend
 
