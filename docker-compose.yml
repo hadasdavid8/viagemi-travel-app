@@ -8,9 +8,12 @@ services:
       GOOGLE_MAPS_API_KEY: "${GOOGLE_MAPS_API_KEY}"
 
   frontend:
-    image: hadasdavid8/travelapp-frontend:latest
+    build:
+      context: ./frontend 
+      args:
+        REACT_APP_API_BASE_URL: "/api" 
     ports:
-      - "80:80"
+      - "3000:80"
     depends_on:
       - backend
 
