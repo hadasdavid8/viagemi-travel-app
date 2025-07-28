@@ -1,1 +1,1 @@
-export const API_BASE_URL = 'https://viagemi.com/';
+export const API_BASE_URL = 'http://52.186.169.52:8000';
