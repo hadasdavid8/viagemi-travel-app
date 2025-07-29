@@ -88,4 +88,3 @@ yarn-error.log*
 pnpm-debug.log*
 
 backend/staticfiles
-frontend/build
