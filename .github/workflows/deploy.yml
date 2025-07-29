@@ -39,7 +39,7 @@ jobs:
           push: true
           tags: ${{ env.DOCKER_HUB_REPO_FRONTEND }}:latest
           build-args: |
-            REACT_APP_API_BASE_URL=http://backend:8000/
+            REACT_APP_API_BASE_URL=/api
             REACT_APP_GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}
 
       - name: Deploy services on server via SSH (Docker Compose)
