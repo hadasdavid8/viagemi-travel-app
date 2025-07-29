@@ -4,18 +4,18 @@ services:
     command: [ "/app/wait-for-db.sh", "python", "manage.py", "runserver", "0.0.0.0:8000" ]
     ports:
       - "8000:8000"
-    environment:
-      GOOGLE_MAPS_API_KEY: "${GOOGLE_MAPS_API_KEY}"
 
   frontend:
-    build:
-      context: ./frontend 
-      args:
-        REACT_APP_API_BASE_URL: "/api" 
-    ports:
-      - "3000:80"
-    depends_on:
-      - backend
+   build:
+    context: ./frontend
+    args:
+      REACT_APP_API_BASE_URL: "/api"
+      REACT_APP_GOOGLE_MAPS_API_KEY: "${GOOGLE_MAPS_API_KEY}"  # מוסיפים את המפתח כאן
+   ports:
+    - "3000:80"
+   depends_on:
+    - backend
+
 
 volumes:
   mysql_data:
