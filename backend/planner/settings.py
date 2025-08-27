@@ -2,9 +2,8 @@ from pathlib import Path
 from decouple import config
 import os
 
-SECRET_KEY = config('SECRET_KEY')
-
-GOOGLE_MAPS_API_KEY = config('GOOGLE_MAPS_API_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-key-if-needed')
+GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY', '')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
