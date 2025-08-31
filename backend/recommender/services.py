@@ -4,7 +4,7 @@ import difflib
 from django.conf import settings
 from .models import RecommendedPlace
 
-GOOGLE_API_KEY = settings.GOOGLE_API_KEY
+GOOGLE_MAPS_API_KEY = settings.GOOGLE_MAPS_API_KEY
 
 LARGE_CITIES = {'new york', 'tokyo', 'london', 'los angeles', 'paris'}
 
@@ -95,7 +95,7 @@ def is_place_in_city(place, destination):
 
 def get_coordinates_for_destination(destination):
     url = "https://maps.googleapis.com/maps/api/geocode/json"
-    params = {"address": destination, "key": GOOGLE_API_KEY}
+    params = {"address": destination, "key": GOOGLE_MAPS_API_KEY}
     try:
         response = requests.get(url, params=params, timeout=5)
         data = response.json()
@@ -113,7 +113,7 @@ def nearby_search(location, radius=1500, place_type="tourist_attraction"):
         "location": f"{lat},{lng}",
         "radius": radius,
         "type": place_type,
-        "key": GOOGLE_API_KEY,
+        "key": GOOGLE_MAPS_API_KEY,
     }
 
     all_results = []
@@ -131,7 +131,7 @@ def nearby_search(location, radius=1500, place_type="tourist_attraction"):
         time.sleep(2)
         params = {
             "pagetoken": next_page_token,
-            "key": GOOGLE_API_KEY
+            "key": GOOGLE_MAPS_API_KEY
         }
     return all_results
 
@@ -139,7 +139,7 @@ def text_search(query):
     url = "https://maps.googleapis.com/maps/api/place/textsearch/json"
     params = {
         "query": query,
-        "key": GOOGLE_API_KEY
+        "key": GOOGLE_MAPS_API_KEY
     }
 
     all_results = []
@@ -156,7 +156,7 @@ def text_search(query):
 
         import time
         time.sleep(2)
-        params = {"pagetoken": next_page_token, "key": GOOGLE_API_KEY}
+        params = {"pagetoken": next_page_token, "key": GOOGLE_MAPS_API_KEY}
         page += 1
 
     return all_results
