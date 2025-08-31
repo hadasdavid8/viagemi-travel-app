@@ -24,14 +24,23 @@ jobs:
         with:
           python-version: '3.13'
       
-      - name: Setup venv, install dependencies and collect static
+      - name: Create and start virtual environment
         run: |
-         cd backend
-         python -m venv venv
-         source venv/bin/activate
-         python -m pip install --upgrade pip
-         pip install -r requirements.txt
-         python manage.py collectstatic --noinput
+          cd backend
+          python -m venv venv
+          source venv/bin/activate
+      
+      - name: Install dependencies
+        run: |
+          cd backend 
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+        
+      - name: Collect static files
+        run: |
+          cd backend 
+          python manage.py collectstatic --noinput
+
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
@@ -40,7 +49,7 @@ jobs:
         with:
           name: python-app
           path: |
-            .
+            cd backend
             !venv/
 
   deploy:
