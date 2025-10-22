@@ -1,10 +1,10 @@
-
 set -e 
 
 echo "--- Running Frontend Install & Build ---"
 
 cd frontend
-npm install 
+
+npm install
 npm run build 
 
 cd ..
@@ -14,10 +14,10 @@ echo "--- Running Django Commands ---"
 cd backend
 
 echo "Running Migrations..."
-python manage.py migrate --noinput
+../antenv/bin/python manage.py migrate --noinput
 
 echo "Collecting Static Files..."
-python manage.py collectstatic --noinput
+../antenv/bin/python manage.py collectstatic --noinput
 
 echo "--- Starting Gunicorn Server ---"
-gunicorn planner.wsgi --bind 0.0.0.0:8000
+../antenv/bin/gunicorn planner.wsgi --bind 0.0.0.0:8000
