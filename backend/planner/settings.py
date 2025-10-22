@@ -6,6 +6,7 @@ GOOGLE_MAPS_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY", "")
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+REACT_BUILD_DIR = BASE_DIR / 'frontend' / 'build'
 
 DEBUG = True
 
@@ -47,7 +48,9 @@ CORS_ALLOWED_ORIGINS=[
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            REACT_BUILD_DIR,
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,6 +98,10 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    REACT_BUILD_DIR / 'static',
+]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
