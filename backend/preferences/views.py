@@ -1,5 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.shortcuts import render
 from rest_framework import status
 from .serializers import TripPreferencesSerializer, TripStyleSerializer
 from .models import TripPreferences , TripStyle
@@ -25,3 +26,7 @@ class TripStylesListView(APIView):
         styles = TripStyle.objects.all()
         serializer = TripStyleSerializer(styles, many=True)
         return Response(serializer.data)
+
+class HomePage(APIView):
+    def get(self, request):
+        return render(request, 'index.html')
